@@ -8,10 +8,12 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 
 const routes: Routes = [
   {path:'', redirectTo:'home', pathMatch:'full'},
-  {path:'products',component:ProductsComponent},
+  {path:'products',component:ProductsComponent,children:[
+    {path:'productDetails/:param', component:ProductDetailsComponent}
+  ]},
   {path:'add', component:AddProductComponent},
   {path:'home', component:HomeComponent},
-  {path:'productDetails/:param', component:ProductDetailsComponent},
+  
   {path:'**', component:NotFoundComponent}
  
 ];

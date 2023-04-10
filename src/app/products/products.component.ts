@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../Models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -14,6 +15,8 @@ export class ProductsComponent {
     {id: 2, title: "T-shirt 2", price: 21, quantity: 10, like: 0},
     {id: 3, title: "T-shirt 3", price: 16, quantity: 8, like: 0}];
 
+    constructor(private R:Router){}
+
     BuyProduct(indice:number){
 
       this.listProdcut[indice].quantity--;    
@@ -21,5 +24,9 @@ export class ProductsComponent {
     LikeProduct(indice:number){
 
       this.listProdcut[indice].like++;    
+    }
+
+    showDetails(id:number){
+    this.R.navigate(['products/productDetails', id], {queryParams:{'name':'test'}});
     }
 }

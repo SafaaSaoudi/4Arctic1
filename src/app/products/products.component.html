@@ -1,0 +1,20 @@
+
+Filter: <input type="text" [(ngModel)]="prix" >
+
+<section *ngFor="let p of listProdcut, let i =index"   >
+
+        <div *ngIf="p.price < prix || !prix " class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../../assets/product.jfif" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{p.title}}</h5>
+              <h5 class="card-title">{{p.price}} and {{p.quantity}}</h5>
+              <button class="btn btn-primary" (click)="BuyProduct(i)" [disabled]="p.quantity==0"  >Buy</button>
+              <button class="btn btn-primary" (click)="LikeProduct(i)"   >Like</button>
+             <a [routerLink]="['/productDetails',p.id]">Show Details</a>
+            </div>
+        </div>
+
+</section>
+<!-- <ng-template #affich2>
+    <h5>No product Found </h5>
+</ng-template> -->

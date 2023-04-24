@@ -1,1 +1,23 @@
-<p>add-product works!</p>
+<h2>Add New Product</h2>
+
+<form #addForm="ngForm" (ngSubmit)="Save(addForm)">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" aria-describedby="productTitle" name="title" [(ngModel)]="P.title" required minlength="3" #title="ngModel">
+      <span style="color:red" *ngIf="title?.errors?.['required'] && title.touched">Title is required</span>
+      <span style="color:red" *ngIf="title?.errors?.['minlength'] && title.touched">Title must be at least 3 car.</span>
+    
+    </div> 
+
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" class="form-control" id="price" aria-describedby="productPrice" name="price" [(ngModel)]="P.price">
+      </div>
+
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="quantity" aria-describedby="quantity" name="quantity" [(ngModel)]="P.quantity" min="100" max="999" #qt="ngModel" [class.is-invalid]="qt.invalid && qt.touched">
+    </div>
+    <button type="submit" class="btn btn-primary"  [disabled]="addForm.invalid"
+      >Submit</button>
+  </form>

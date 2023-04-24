@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../Models/product';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
@@ -8,13 +8,16 @@ import { ProductService } from '../services/product.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   
   prix!:number;
-  listProdcut=this.productS.listProdcut;
-  
+  listProdcut!:Product[];
+
     constructor(private R:Router, private productS:ProductService){}
 
+    ngOnInit(){
+      this.productS.getAllProducts().subscribe(data => this.listProdcut=data);
+    }
     BuyProduct(indice:number){
 
       this.listProdcut[indice].quantity--;    

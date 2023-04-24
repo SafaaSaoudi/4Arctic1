@@ -1,14 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../Models/product';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  listProdcut:Product[]=[
-    {id: 1, title: "T-shirt 1", price: 18, quantity: 0, like: 0},
-    {id: 2, title: "T-shirt 2", price: 21, quantity: 10, like: 0},
-    {id: 3, title: "T-shirt 3", price: 16, quantity: 8, like: 0}];
+  listProdcut:Product[]=[];
+    
+  url="http://localhost:3000/products";
+  constructor(private http:HttpClient) { }
 
-  constructor() { }
+
+  getProduct(id:number){
+    return this.http.get<Product>(this.url+`/${id}`);
+  }
+
+  getAllProducts(){
+    return this.http.get<Product[]>(this.url);
+  }
+
+  addProduct(p:Product){
+    return this.http.post(this.url, p);
+  }
+
+  updateProduct(id:number, p:Product){
+     return this.http.put(this.url+`/${id}`, p);
+  }
+
+  deleteProduct(id:number){
+    return this.http.delete(this.url+`/${id}`);
+  }
 }
